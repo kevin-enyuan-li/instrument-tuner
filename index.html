@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instrument Tuner</title>
+<meta name="theme-color" content="#15171c">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main id="landing" class="landing">
+    <h1>Instrument Tuner</h1>
+    <p class="subtitle">Choose an instrument to tune</p>
+    <div class="instrument-cards">
+      <button class="instrument-card" data-instrument="guitar">
+        <span class="instrument-icon">🎸</span>
+        <span class="instrument-name">Guitar</span>
+      </button>
+      <button class="instrument-card" data-instrument="bass">
+        <span class="instrument-icon icon-bass">🎸</span>
+        <span class="instrument-name">Bass Guitar</span>
+      </button>
+      <button class="instrument-card" data-instrument="ukulele">
+        <span class="instrument-icon">🪕</span>
+        <span class="instrument-name">Ukulele</span>
+      </button>
+      <button class="instrument-card" data-instrument="violin">
+        <span class="instrument-icon">🎻</span>
+        <span class="instrument-name">Violin</span>
+      </button>
+      <button class="instrument-card" data-instrument="viola">
+        <span class="instrument-icon icon-viola">🎻</span>
+        <span class="instrument-name">Viola</span>
+      </button>
+      <button class="instrument-card" data-instrument="piano">
+        <span class="instrument-icon">🎹</span>
+        <span class="instrument-name">Piano</span>
+      </button>
+    </div>
+  </main>
+
+  <main id="tuner" class="tuner hidden">
+    <button id="backBtn" class="back-btn">&larr; Change instrument</button>
+    <h1 id="tunerTitle">Tuner</h1>
+
+    <div class="controls">
+      <button id="toggleBtn" class="start-btn">Start Tuning</button>
+      <label id="a4Control" class="reference-pitch hidden">
+        A4 =
+        <input type="number" id="a4Input" value="440" min="415" max="466" step="1">
+        Hz
+      </label>
+      <label id="capoControl" class="capo-control hidden">
+        Capo
+        <select id="capoSelect">
+          <option value="0">None</option>
+          <option value="1">1st Fret</option>
+          <option value="2">2nd Fret</option>
+          <option value="3">3rd Fret</option>
+          <option value="4">4th Fret</option>
+          <option value="5">5th Fret</option>
+          <option value="6">6th Fret</option>
+          <option value="7">7th Fret</option>
+        </select>
+      </label>
+    </div>
+
+    <p id="status" class="status">Click "Start Tuning" and allow microphone access</p>
+
+    <section id="display" class="display hidden">
+      <div class="note-row">
+        <span id="noteName" class="note-name">&ndash;</span>
+        <span id="octave" class="octave"></span>
+      </div>
+
+      <div id="stringLabel" class="string-label hidden"></div>
+
+      <div id="pianoKeyboard" class="piano-keyboard hidden">
+        <div class="keyboard-octave-label">Octave <span id="keyboardOctave">&ndash;</span></div>
+        <div id="keyboardKeys" class="keyboard-keys"></div>
+      </div>
+
+      <div class="meter">
+        <div class="meter-scale">
+          <span class="tick">&minus;50</span>
+          <span class="tick">&minus;25</span>
+          <span class="tick center">0</span>
+          <span class="tick">+25</span>
+          <span class="tick">+50</span>
+        </div>
+        <div class="meter-track">
+          <div class="meter-center-line"></div>
+          <div id="needle" class="needle"></div>
+        </div>
+        <div class="meter-labels">
+          <span>FLAT</span>
+          <span>IN TUNE</span>
+          <span>SHARP</span>
+        </div>
+      </div>
+
+      <div class="readout">
+        <span id="cents" class="cents">&ndash; cents</span>
+        <span id="frequency" class="frequency">&ndash; Hz</span>
+      </div>
+    </section>
+
+    <section id="signalSection" class="signal-row hidden">
+      <span class="signal-label">Input level</span>
+      <div class="signal-meter"><div class="signal-bar" id="signalBar"></div></div>
+    </section>
+
+    <canvas id="waveform" class="hidden" width="600" height="90"></canvas>
+
+    <section id="notesSection" class="strings hidden">
+      <div class="notes-header">
+        <h2>Tuning</h2>
+        <select id="tuningSelect" class="tuning-select"></select>
+      </div>
+      <div id="noteList" class="string-list"></div>
+      <div id="customEditor" class="custom-editor hidden">
+        <div id="customRows" class="custom-rows"></div>
+        <button id="applyCustomBtn" type="button" class="apply-custom-btn">Apply Custom Tuning</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/instruments.js"></script>
+  <script src="js/pitchDetector.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
