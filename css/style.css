@@ -84,10 +84,11 @@ h2 {
 .instrument-card:active { transform: translateY(0); }
 
 .instrument-icon { font-size: 2.6rem; }
-/* No dedicated bass guitar or viola emoji exists, so each reuses a sibling
-   instrument's emoji with a shifted color to stay visually distinguishable. */
+/* No dedicated bass guitar, viola, or cello emoji exists, so each reuses a
+   sibling instrument's emoji with a shifted color to stay distinguishable. */
 .instrument-icon.icon-bass { filter: hue-rotate(155deg) saturate(1.15); }
 .instrument-icon.icon-viola { filter: hue-rotate(200deg) saturate(1.2); }
+.instrument-icon.icon-cello { filter: hue-rotate(100deg) saturate(1.2); }
 .instrument-name { font-size: 1.05rem; font-weight: 600; }
 
 /* ---- Tuner screen ---- */

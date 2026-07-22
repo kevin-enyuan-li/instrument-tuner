@@ -1,7 +1,7 @@
 # Instrument Tuner
 
-A browser-based tuner for guitar, bass guitar, ukulele, violin, viola, and
-piano, using the Web Audio API and the **YIN pitch detection algorithm**
+A browser-based tuner for guitar, bass guitar, ukulele, violin, viola, cello,
+and piano, using the Web Audio API and the **YIN pitch detection algorithm**
 (de Cheveigné & Kawahara, 2002) with parabolic interpolation for sub-cent
 accuracy. Pick an instrument on the landing screen, then tune by ear against
 the live meter.
@@ -12,7 +12,7 @@ PWA and works offline after the first visit.
 **[▶ Try it live](https://kevin-enyuan-li.github.io/instrument-tuner/)** — runs immediately in your browser, no download needed.
 
 <p align="center">
-  <img src="screenshots/landing.png" alt="Instrument picker with all six instruments" width="420">
+  <img src="screenshots/landing.png" alt="Instrument picker with all seven instruments" width="420">
 </p>
 
 <p align="center">
@@ -37,13 +37,13 @@ A4 reference, and capo setting are remembered for next time.
 
 ## Features
 
-- **Six instruments**: Guitar, Bass Guitar, Ukulele, Violin, Viola, Piano —
-  each with its own frequency range and detection tuning (see below).
+- **Seven instruments**: Guitar, Bass Guitar, Ukulele, Violin, Viola, Cello,
+  Piano — each with its own frequency range and detection tuning (see below).
 - **Alternate tunings**: Guitar has Standard, Drop D, Half Step Down, Open G,
   Open D, and DADGAD presets; Bass has 4-string and 5-string Standard;
-  Ukulele has Standard (reentrant High G), Low G, and Baritone; Violin and
-  Viola each have their standard fifths tuning. A **Custom…** option lets
-  you set any note/octave per string on any of them.
+  Ukulele has Standard (reentrant High G), Low G, and Baritone; Violin,
+  Viola, and Cello each have their standard fifths tuning. A **Custom…**
+  option lets you set any note/octave per string on any of them.
 - **Capo support**: a capo-fret selector shifts every reference pitch up by
   the right number of semitones, so the tuner still reads "in tune"
   correctly with a capo on.
@@ -91,6 +91,14 @@ A4 reference, and capo setting are remembered for next time.
     2nd harmonic (1318.52 Hz).
   - **Viola** — 115–500 Hz, covering C3–A4, capped below the A string's
     2nd harmonic (880 Hz).
+  - **Cello** — 63–260 Hz, covering C2–A3, capped below the A string's 2nd
+    harmonic (440 Hz). The floor here is a tighter squeeze than any other
+    instrument: cello's open C string (65.41 Hz) sits close enough to 50/60
+    Hz mains hum that catching a *very* flat C string trades off against
+    keeping hum structurally excluded from the search range — the floor is
+    kept just above 60 Hz specifically, since that's what prevents hum from
+    ever being mistaken for a real note in the first place, rather than
+    relying on the boundary-artifact guard alone.
   - **Piano** — full range (25–4500 Hz) covering A0–C8; no fixed tuning
     list, since any of the 88 keys is valid.
 - **Reference-note matching**: each tuning's target frequencies are stored

@@ -235,6 +235,42 @@ const INSTRUMENTS = {
     statusIdle: 'Listening… play a single string',
     statusPrompt: 'Click "Start Tuning" and allow microphone access',
   },
+  cello: {
+    label: 'Cello',
+    icon: '🎻',
+    minFrequency: 63,            // just above 60 Hz mains hum — cello's C string (65.41 Hz) sits
+                                  // much closer to the hum band than any other instrument here,
+                                  // so there's less margin to work with than usual. Keeping the
+                                  // floor *above* 60 Hz (not just close to it) is what actually
+                                  // matters: it structurally excludes hum from ever being a valid
+                                  // in-range candidate, rather than just relying on the boundary-
+                                  // artifact guard to catch it after the fact. Trade-off: a very
+                                  // flat C string (more than ~1 semitone flat) may briefly read as
+                                  // nothing until it's tuned up closer to pitch.
+    maxFrequency: 260,           // just above A3 (220 Hz) — kept tight so the search can't lock
+                                  // onto the A string's own 2nd harmonic (440 Hz)
+    threshold: 0.15,
+    clarityThreshold: 0.8,
+    smoothingWindow: 4,
+    silenceFramesToClear: 20,
+    defaultTuning: 'standard',
+    tunings: {
+      standard: {
+        label: 'Standard (C G D A)',
+        notes: [
+          { name: 'C', octave: 2, freq: 65.41, string: 4 },
+          { name: 'G', octave: 2, freq: 98.00, string: 3 },
+          { name: 'D', octave: 3, freq: 146.83, string: 2 },
+          { name: 'A', octave: 3, freq: 220.00, string: 1 },
+        ],
+      },
+    },
+    showA4Input: true,
+    showWaveform: false,
+    showSignalMeter: true,
+    statusIdle: 'Listening… play a single string',
+    statusPrompt: 'Click "Start Tuning" and allow microphone access',
+  },
   piano: {
     label: 'Piano',
     icon: '🎹',
